@@ -99,9 +99,9 @@ class NativePlayerExtras(context: Context, private val player: ExoPlayer, privat
     private fun dp(n: Int) = (n * resources.displayMetrics.density).toInt()
     private fun isInside(view: View, parent: View): Boolean { var v: View? = view; while (v != null) { if (v === parent) return true; v = v.parent as? View }; return false }
     private fun highlightControls(view: View) { if (view is android.view.ViewGroup) (0 until view.childCount).forEach { highlightControls(view.getChildAt(it)) } else if (view.isFocusable) highlightFocus(view) }
-    /** A pink outline on the focused control, matching the home screen, so the remote's position is obvious from the sofa. */
+    /** A soft white halo on the focused control: clearer than Media3's default from the sofa, without drawing attention away from the video. */
     private fun highlightFocus(view: View) {
-        val ring = GradientDrawable().apply { cornerRadius = dp(12).toFloat(); setColor(0x40FA2389); setStroke(dp(3), 0xFFFA2389.toInt()) }
+        val ring = GradientDrawable().apply { cornerRadius = dp(48).toFloat(); setColor(0x26FFFFFF); setStroke(dp(2), 0x99FFFFFF.toInt()) }
         view.foreground = android.graphics.drawable.StateListDrawable().apply { addState(intArrayOf(android.R.attr.state_focused), ring) }
     }
     private fun label(value: String, size: Float) = TextView(context).apply { text = value; textSize = size; setTextColor(Color.WHITE); setPadding(0, dp(2), 0, dp(2)) }
